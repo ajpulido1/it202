@@ -7,7 +7,7 @@
   </script>
 </head>
 <style>
-    h1 {color: blue; font-family: helvetica;}
+    h1 {color: yellow; font-family: helvetica; background-color: green; text-align: center;}
 </style>
 <body>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -18,7 +18,7 @@
           
           var apiPassThruUrl = "https://polar-garden-75406.herokuapp.com/apiPassThru.php";
           
-          var apiEndpoint = "http://ctabustracker.com/bustime/api/v2/getroutes";
+          var apiEndpoint = "http://ctabustracker.com/bustime/api/v2/getpredictions?rt=49,X49,152&stpid=8417,8195,12527,12569";
           
           
           $.ajax({
@@ -30,10 +30,10 @@
                       "format":"json"}
             }).done (function (data) {
               console.log(data);
-              $("body").append("<h1>Bus Routes</h1>");
+              $("body").append("<h1>LT CTA Bus Tracker</h1>");
              
-              $.each(data["bustime-response"]["routes"], function(i,v) {
-                  $("body").append("Route #" + v.rt + ", " + v.rtnm + "<br>");
+              $.each(data["bustime-response"]["prd"], function(i,v) {
+                  $("body").append("Route # " + v.rt + " " + v.rtdir + ", estimated arrival time: " + v.prdctdn + " minutes" + "<br>");
                 
               })
 
